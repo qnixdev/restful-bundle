@@ -1,0 +1,29 @@
+{
+    "name": "qnix/restful",
+    "type": "symfony-bundle",
+    "description": "Qnix RESTful API attributes",
+    "license": "MIT",
+    "require": {
+        "php": ">=8.4",
+        "ext-simplexml": "*",
+        "jms/serializer-bundle": "^5.5",
+        "symfony/framework-bundle": "^7.2",
+        "symfony/validator": "^7.2"
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-latest",
+        "symfony/phpunit-bridge": "^7.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Qnix\\RESTful\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Qnix\\RESTful\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
