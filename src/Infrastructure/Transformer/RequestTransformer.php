@@ -95,7 +95,7 @@ final readonly class RequestTransformer
     {
         if (null === $instance->getItemType()) {
             throw new Exception\ApiWrongDataException(
-                "An 'item_type' parameter is expected for field with type: 'object'.",
+                "An 'itemType' parameter is expected for field with type: 'object'.",
             );
         }
         if (!is_array($data)) {
@@ -116,7 +116,7 @@ final readonly class RequestTransformer
     {
         if (null === $instance->getItemType()) {
             throw new Exception\ApiWrongDataException(
-                "An 'item_type' parameter is expected for field with type: 'array_object'.",
+                "An 'itemType' parameter is expected for field with type: 'array_object'.",
             );
         }
 
@@ -144,12 +144,12 @@ final readonly class RequestTransformer
     {
         if (null === $instance->getItemType()) {
             throw new Exception\ApiWrongDataException(
-                "An 'item_type' parameter is expected for field with type: 'array_object_xml'.",
+                "An 'itemType' parameter is expected for field with type: 'array_object_xml'.",
             );
         }
         if (null === $fieldName) {
             throw new Exception\ApiWrongDataException(
-                "An 'xml_array_field' parameter is expected for field with type: 'array_object_xml'.",
+                "An 'xmlArrayField' parameter is expected for field with type: 'array_object_xml'.",
             );
         }
 
@@ -183,7 +183,7 @@ final readonly class RequestTransformer
     {
         if (null === $instance->getItemType()) {
             throw new Exception\ApiWrongDataException(
-                "An 'item_type' parameter is expected for field with type: 'array_object_i18n'.",
+                "An 'itemType' parameter is expected for field with type: 'array_object_i18n'.",
             );
         }
 
@@ -349,7 +349,7 @@ final readonly class RequestTransformer
                     );
                 }
 
-                $value = (bool) $value;
+                $value = !preg_match('/^false$/i', $value) && (bool) $value;
 
                 break;
             case 'file':
