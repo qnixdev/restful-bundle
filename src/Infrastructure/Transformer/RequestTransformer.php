@@ -62,10 +62,23 @@ final readonly class RequestTransformer
             }
 
             $prop->setValue($requestObject, match ($instance->getType()) {
-                'object' => $this->mapArrayToObject($instance, $args[$fieldName] ?? $args[self::XML][$fieldName]),
-                'array_object' => $this->mapArrayObjectList($instance, $args[$fieldName] ?? $args[self::XML][$fieldName]),
-                'array_object_xml' => $this->mapXmlObjectList($instance, $fieldName, $args[$fieldName] ?? $args[self::XML][$fieldName]),
-                'array_object_i18n' => $this->mapAssociativeArrayObjectList($instance, $args[$fieldName] ?? $args[self::XML][$fieldName]),
+                'object' => $this->mapArrayToObject(
+                    $instance,
+                    $args[$fieldName] ?? $args[self::XML][$fieldName],
+                ),
+                'array_object' => $this->mapArrayObjectList(
+                    $instance,
+                    $args[$fieldName] ?? $args[self::XML][$fieldName],
+                ),
+                'array_object_xml' => $this->mapXmlObjectList(
+                    $instance,
+                    $args[$fieldName] ?? $args[self::XML][$fieldName],
+                    $instance->getXmlArrayField(),
+                ),
+                'array_object_i18n' => $this->mapAssociativeArrayObjectList(
+                    $instance,
+                    $args[$fieldName] ?? $args[self::XML][$fieldName],
+                ),
                 default => $this->mapValue($instance, $args[$fieldName] ?? $args[self::XML][$fieldName])
             });
         }
@@ -127,15 +140,20 @@ final readonly class RequestTransformer
      * @throws Exception\ApiWrongDataException
      * @throws \ReflectionException
      */
-    private function mapXmlObjectList(Field $instance, string $fieldName, mixed $data): array
+    private function mapXmlObjectList(Field $instance, mixed $data, ?string $fieldName): array
     {
         if (null === $instance->getItemType()) {
             throw new Exception\ApiWrongDataException(
                 "An 'item_type' parameter is expected for field with type: 'array_object_xml'.",
             );
         }
+        if (null === $fieldName) {
+            throw new Exception\ApiWrongDataException(
+                "An 'xml_array_field' parameter is expected for field with type: 'array_object_xml'.",
+            );
+        }
 
-        $args = $data[mb_substr($fieldName, 0, -1)] ?? [];
+        $args = $data[$fieldName] ?? [];
         $response = [];
 
         foreach ($args as $key => $value) {

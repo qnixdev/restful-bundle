@@ -19,12 +19,12 @@ readonly class Field
         'bool',
         'file',
         'enum',
+        'object',
         'array',
         'array_string',
         'array_int',
         'array_file',
         'array_enum',
-        'object',
         'array_object',
         'array_object_xml',
         'array_object_i18n',
@@ -36,6 +36,7 @@ readonly class Field
         private ?string $itemType = null,
         private bool $isOptional = false,
         private ?string $dateFormat = null,
+        private ?string $xmlArrayField = null,
     ) {
         if (!in_array($type, self::TYPE_LIST)) {
             throw new RuntimeException(
@@ -67,5 +68,10 @@ readonly class Field
     public function getDateFormat(): ?string
     {
         return $this->dateFormat;
+    }
+
+    public function getXmlArrayField(): ?string
+    {
+        return $this->xmlArrayField;
     }
 }
