@@ -33,9 +33,9 @@ class ExampleController extends AbstractController
     public function example(
         #[MapRequestPayload(resolver: QR\JsonRawResolver::class)] SomeRequest $request
     ): Response {
-        // $data will be automatically populated from FormData, JSON, or XML
+        // $request will be automatically populated from FormData, JSON, or XML
         // ...
-        return $this->json($data);
+        return $this->json($request);
     }
 }
 ```
