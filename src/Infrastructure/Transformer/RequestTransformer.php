@@ -348,6 +348,9 @@ final readonly class RequestTransformer
                         sprintf("Invalid type of value. Expected type: '%s', '%s' given.", $type, gettype($value)),
                     );
                 }
+                if (is_bool($value)) {
+                    return $value;
+                }
 
                 $value = !preg_match('/^false$/i', $value) && (bool) $value;
 
