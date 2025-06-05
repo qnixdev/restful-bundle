@@ -79,7 +79,10 @@ final readonly class RequestTransformer
                     $instance,
                     $args[$fieldName] ?? $args[self::XML][$fieldName],
                 ),
-                default => $this->mapValue($instance, $args[$fieldName] ?? $args[self::XML][$fieldName])
+                default => $this->mapValue(
+                    $instance,
+                    $args[$fieldName] ?? $args[self::XML][$fieldName],
+                )
             });
         }
 
@@ -125,7 +128,7 @@ final readonly class RequestTransformer
         foreach ($data as $value) {
             if (!is_array($value)) {
                 throw new Exception\ApiWrongDataException(
-                    sprintf("%s must be an array.", $value),
+                    "$value must be an array.",
                 );
             }
 
@@ -159,7 +162,7 @@ final readonly class RequestTransformer
         foreach ($args as $key => $value) {
             if (!is_array($value)) {
                 throw new Exception\ApiWrongDataException(
-                    sprintf("%s must be an array.", $value),
+                    "$value must be an array.",
                 );
             }
             if ($key === self::XML) {
@@ -194,7 +197,7 @@ final readonly class RequestTransformer
         foreach ($data as $key => $value) {
             if (!is_array($value)) {
                 throw new Exception\ApiWrongDataException(
-                    sprintf("%s must be an array.", $value),
+                    "$value must be an array.",
                 );
             }
 
@@ -483,7 +486,7 @@ final readonly class RequestTransformer
                 break;
             default:
                 throw new Exception\ApiWrongDataException(
-                    sprintf("Type: '%s' not supported.", $type),
+                    "Type: '$type' not supported.",
                 );
         }
 

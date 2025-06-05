@@ -2,19 +2,20 @@
 
 namespace Qnix\RESTful\Infrastructure\Transformer\Exception;
 
-use Exception;
 use Symfony\Component\HttpFoundation\Response;
-use Throwable;
 
-final class ApiValidationFieldException extends Exception
+final class ApiValidationFieldException extends \Exception
 {
     public function __construct(
         private readonly array $errors,
-        ?Throwable $previous = null,
+        ?\Throwable $previous = null,
     ) {
         parent::__construct(code: Response::HTTP_UNPROCESSABLE_ENTITY, previous: $previous);
     }
 
+    /**
+     * @return array<string, string[]>
+     */
     public function getErrors(): array
     {
         return $this->errors;

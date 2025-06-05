@@ -2,7 +2,7 @@
 
 namespace Qnix\RESTful\Infrastructure\EventSubscriber;
 
-use Qnix\RESTful\Attribute as ER;
+use Qnix\RESTful\Attribute as QR;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -37,9 +37,9 @@ final class ControllerEventSubscriber implements EventSubscriberInterface
 
         $refClass = new \ReflectionClass($controllerInstance::class);
         $method = $refClass->getMethod($methodName);
-        $methodAttribute = $method->getAttributes(ER\Groups::class)[0] ?? null;
+        $methodAttribute = $method->getAttributes(QR\Groups::class)[0] ?? null;
 
-        /** @var ER\Groups|null  $attributeInstance */
+        /** @var QR\Groups|null  $attributeInstance */
         $attributeInstance = $methodAttribute?->newInstance();
 
         if (null !== $attributeInstance) {
