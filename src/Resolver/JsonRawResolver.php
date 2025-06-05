@@ -15,7 +15,8 @@ final readonly class JsonRawResolver extends AbstractPayloadResolver implements 
     public function resolve(Request $request, ArgumentMetadata $argument): iterable
     {
         $className = (string) $argument->getType();
-        $attribute = $argument->getAttributesOfType(MapRequestPayload::class)[0];
+        /** @var MapRequestPayload|null  $attribute */
+        $attribute = $argument->getAttributesOfType(MapRequestPayload::class)[0] ?? null;
 
         if ($request->isMethod(Request::METHOD_GET)) {
             $item = $this->requestTransformer->transform(

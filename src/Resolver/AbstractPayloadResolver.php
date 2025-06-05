@@ -18,11 +18,14 @@ abstract readonly class AbstractPayloadResolver
     /**
      * @throws RestException\ApiValidationFieldException
      */
-    protected function validateObject(object|array $item, string $className, MapRequestPayload $payload): void
-    {
+    protected function validateObject(
+        object|array $item,
+        string $className,
+        ?MapRequestPayload $payload = null,
+    ): void {
         $violations = $this->validator->validate(
             $item,
-            groups: $payload->validationGroups ?? [],
+            groups: $payload?->validationGroups ?? [],
         );
 
         if ($violations->count() > 0) {
