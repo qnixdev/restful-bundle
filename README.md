@@ -31,10 +31,11 @@ class ExampleController extends AbstractController
 {
     #[Route('/api/example', methods: ['POST'])]
     public function example(
-        #[MapRequestPayload(resolver: QR\JsonRawResolver::class)] SomeRequest $request
+        #[MapRequestPayload(resolver: QR\JsonRawResolver::class)] SomeRequest $request,
     ): Response {
-        // $request will be automatically populated from FormData, JSON, or XML
+        // The $request will be automatically populated from FormData, JSON, or XML
         // ...
+
         return $this->json($request);
     }
 }
@@ -47,7 +48,7 @@ namespace App\Request;
 use Qnix\RESTful\Attribute as QA;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class SomeRequest
+final class SomeRequest
 {
     #[Assert\NotBlank(allowNull: true, normalizer: 'trim')]
     #[QA\Field(name: 'search', type: 'string', isOptional: true)]
