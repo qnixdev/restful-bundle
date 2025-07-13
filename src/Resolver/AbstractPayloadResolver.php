@@ -31,17 +31,18 @@ abstract readonly class AbstractPayloadResolver
         if ($violations->count() > 0) {
             $normalizer = (string) preg_replace(['/Exception/', '/(?<!\s)[A-Z]/'], ['', '_$0'], $className);
             $normalizer = strtoupper(substr($normalizer, 1));
-            $errorList = [];
+            $errors = [];
 
             /** @var ConstraintViolation  $violation */
             foreach ($violations as $violation) {
-                $errorList[$normalizer][] = [
+                $errors[$normalizer][] = [
                     'parameter' => $violation->getPropertyPath(),
+                    'value' => $violation->getInvalidValue(),
                     'error' => $violation->getMessage(),
                 ];
             }
 
-            throw new RestException\ApiValidationFieldException($errorList);
+            throw new RestException\ApiValidationFieldException($errors);
         }
     }
 }

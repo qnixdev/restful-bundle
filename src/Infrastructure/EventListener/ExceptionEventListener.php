@@ -30,21 +30,10 @@ readonly class ExceptionEventListener
             );
         }
         if ($ex instanceof RestException\ApiValidationFieldException) {
-            $violations = [];
-
-            foreach ($ex->getErrors() as $errorData) {
-                foreach ($errorData as $err) {
-                    $violations[] = [
-                        'parameter' => $err['parameter'],
-                        'error' => $err['error'],
-                    ];
-                }
-            }
-
             return $this->formatArray(
                 slug: $ex->getMessage(),
                 message: '',
-                violations: $violations,
+                violations: array_merge(...array_values($ex->getErrors())),
             );
         }
         if ($ex instanceof RestException\ApiWrongDataException) {
@@ -67,7 +56,7 @@ readonly class ExceptionEventListener
         if ($message !== '') {
             $error['message'] = $message;
         }
-        if (count($violations) > 0) {
+        if (!empty($violations)) {
             $error['details'] = $violations;
         }
 
