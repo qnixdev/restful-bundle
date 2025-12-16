@@ -7,12 +7,12 @@
         "php": ">=8.4",
         "ext-simplexml": "*",
         "jms/serializer-bundle": "^5.5",
-        "symfony/framework-bundle": "^7.2",
-        "symfony/validator": "^7.2"
+        "symfony/framework-bundle": "^7.0 || ^8.0",
+        "symfony/validator": "^7.0 || ^8.0"
     },
     "require-dev": {
         "roave/security-advisories": "dev-latest",
-        "symfony/phpunit-bridge": "^7.2"
+        "symfony/phpunit-bridge": "^7.0 || ^8.0"
     },
     "autoload": {
         "psr-4": {
