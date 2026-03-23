@@ -3,3 +3,6 @@ var/
 vendor/
 composer.lock
 phpunit.xml
+
+.DS_Store
+**/.DS_Store

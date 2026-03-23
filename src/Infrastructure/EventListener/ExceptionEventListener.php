@@ -23,20 +23,20 @@ readonly class ExceptionEventListener
 
     private function convertExceptionToArrayFormat(\Throwable $ex): array
     {
-        if ($ex instanceof RestException\ApiMissingFieldException) {
+        if ($ex instanceof RestException\ApiMissingFieldException && !$ex->isProcessed()) {
             return $this->formatArray(
                 slug: $ex->getMessage(),
                 message: $ex->getMessage(),
             );
         }
-        if ($ex instanceof RestException\ApiValidationFieldException) {
+        if ($ex instanceof RestException\ApiValidationFieldException && !$ex->isProcessed()) {
             return $this->formatArray(
                 slug: $ex->getMessage(),
                 message: '',
                 violations: array_merge(...array_values($ex->getErrors())),
             );
         }
-        if ($ex instanceof RestException\ApiWrongDataException) {
+        if ($ex instanceof RestException\ApiWrongDataException && !$ex->isProcessed()) {
             return $this->formatArray(
                 slug: $ex->getMessage(),
                 message: $ex->getMessage(),
