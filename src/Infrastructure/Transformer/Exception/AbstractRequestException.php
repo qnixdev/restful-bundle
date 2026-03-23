@@ -10,4 +10,11 @@ abstract class AbstractRequestException extends \Exception
     {
         return $this->isProcessed;
     }
+
+    public function setIsProcessed(bool $isProcessed): static
+    {
+        $this->isProcessed = $isProcessed;
+
+        return $this;
+    }
 }
