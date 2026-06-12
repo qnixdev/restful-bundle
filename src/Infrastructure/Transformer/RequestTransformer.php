@@ -355,7 +355,7 @@ final readonly class RequestTransformer
                     return $value;
                 }
 
-                $value = !preg_match('/^false$/i', $value) && (bool) $value;
+                $value = !preg_match('/^false$/i', (string) $value) && (bool) $value;
 
                 break;
             case 'file':
